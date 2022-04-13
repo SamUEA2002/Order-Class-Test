@@ -1,3 +1,5 @@
+//Server that the website runs on
+
 const express = require('express');
 const app = express();
 
