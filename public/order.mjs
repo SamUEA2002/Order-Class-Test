@@ -86,8 +86,24 @@ function createUserOrder() {
     orderMap.set(key, Order)
 
     console.log(orderMap.get(key))
+
+    showAllOrders();
 }
 
 function showOrders(key){
     console.log(orderMap.get(key))
 }
+
+function showAllOrders(){
+
+    //x = orderMap.size()
+    
+    for (const [key, value] of Object.entries(Order)) {
+        console.log(key, value);
+      }
+
+    //console.log(orderMap.get(key))
+}
+
+
+//store the objects in array or hashmap
