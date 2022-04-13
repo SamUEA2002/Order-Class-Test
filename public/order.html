@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PMS ORDER</title>
+    <meta charset=�utf-8�>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="order.mjs"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="buttons.css" />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="form.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+    <div class="header">
+        <a href="#default" class="logo">ORDER PAGE</a>
+        <div class="header-right">
+          <a class="active" href="index.html">Home</a>
+          <a href="#contact">Contact</a>
+          <a href="#logout">Logout</a>
+        </div>
+      </div>
+
+      <form target="_blank" method="post" action="/done" style="max-width:500px;margin:auto">
+        <h2>Order Form (STANDARD)</h2>
+        <div class="input-container">
+          <i class="fa fa-user icon"></i>
+          <input class="input-field" type="text" placeholder="Name" id="Name">
+        </div>
+
+        <p>Order Type: </p>
+        <div class="input-container">
+            <i class="fa fa-square icon"></i>
+            <label for="input-field"></label>
+            <select name="types" id="Type">
+                <option value="Car">CAR</option>
+                <option value="Bike">BIKE</option>
+                <option value="Disabled">DISABLED</option>
+            </select>
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-tag icon"></i>
+            <input class="input-field" type="text" placeholder="Number Plate" id="Reg">
+        </div>
+      
+        <div class="input-container">
+          <i class="fa fa-envelope icon"></i>
+          <input class="input-field" type="text" placeholder="Email" id="Email">
+        </div>
+        
+        <div class="input-container">
+          <i class="fa fa-phone icon"></i>
+          <input class="input-field" type="tel" placeholder="Phone Number" id="Phone Number">
+        </div>
+
+        <p>Start Date: </p>
+        <div class="input-container">
+            <i class="fa fa-calendar-times-o icon"></i>
+            <input class="input-field" type=date min=2014-09-08 id="Start Date">
+        </div>
+
+        <p>Start Time: </p>
+        <div class="input-container">
+            <i class="fa fa-hourglass-end icon"></i>
+            <input class="input-field" type="time" min="06:00" max="17:00" step="1800" id="Start Time">
+        </div>
+
+        <p>Duration (1-5 hours): </p>
+        <div class="input-container">
+            <i class="fa fa-building icon"></i>
+            <input class="input-field" type="number" placeholder="Duration (hours)"  min=1 max=5 step=1, id="Duration">
+        </div>
+        <p>Please note parking lots are only open from 6am - 10pm. </p>
+      
+        <input type="reset" class="btn2">
+    <br></br>
+        <button type="submit" class="btn" onclick="createUserOrder()" >Confirm Order</button>
+      </form>
+      
+
+    <main>
+        <h2>Return to User Home</h2>
+        <button class="button button1", onclick="location.href='index.html'">User Home</button>
+    </main>
+
+    <footer id="title">Copyright © 2022 SE Group 30</footer>
+
+</body>
+
+
+
+</html>
