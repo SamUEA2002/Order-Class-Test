@@ -1,6 +1,8 @@
 // order.mjs
 
-const { arrayBuffer } = require("stream/consumers")
+//allow to read and write from file :(
+
+//const { arrayBuffer } = require("stream/consumers")
 
 
 //class createOrder that creates an opject of createOrder when called 
@@ -89,18 +91,32 @@ function createUserOrder() {
     //saves the order in the orderMap
     orderMap.set(key, Order)
 
-    console.log(orderMap.get(key))
-
+    //adds the key of the obejct to the orderArray
     orderArray.push(key)
 
-    showAllOrders();
+
+    //checks that the order is in the map
+    showOrders(key);
+
 }
+
 
 function showOrders(key){
     console.log(orderMap.get(key))
+    console.log(orderArray)
+    console.log(orderMap)
 }
 
 function showAllOrders(){
+
+    showOrders('shtm02@gmail.com2022-04-0816:303')
+
+    //orderArray.forEach(element => {
+      //  console.log(element);
+    //});
+    console.log(orderArray)
+    console.log(orderMap)
+    console.log(orderArray[0])
 
     //x = orderMap.size()
     
@@ -110,8 +126,9 @@ function showAllOrders(){
 
     //console.log(orderMap.get(key))
 
+    console.log(orderMap.get('shtm02@gmail.com2022-04-0816:303'))
 
-    //add current orders to the confirmation page 
+    //adds all current orders to the confirmation page 
     console.log("test")
     document.getElementById("OrdersUpdate").innerHTML += 
     "<h3>This is an order:</h3>";
@@ -121,3 +138,9 @@ function showAllOrders(){
 
 
 //store the objects in array or hashmap
+
+
+
+//orders still need to be accepted before they can be sent completed 
+
+//save orders to json 
