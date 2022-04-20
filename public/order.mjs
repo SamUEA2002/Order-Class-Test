@@ -1,5 +1,7 @@
 // order.mjs
 
+const { arrayBuffer } = require("stream/consumers")
+
 
 //class createOrder that creates an opject of createOrder when called 
 class createOrder{
@@ -48,6 +50,9 @@ class createOrder{
 //HashMap to store the Order Objects ??? should maybe use array so its easier to show all orders? hashmap is good because its easy to get specific items
 var orderMap = new Map();
 
+//Arraylist to save the key of the hashmap funciton. Hashmap for easy access to spcefic items. arraylist to itterate through them easily
+var orderArray = [];
+
 function createUserOrder() {
 
     //takes in and sets the values from the table to the variables below
@@ -85,6 +90,8 @@ function createUserOrder() {
     orderMap.set(key, Order)
 
     console.log(orderMap.get(key))
+
+    orderArray.push(key)
 
     showAllOrders();
 }
