@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const { res } = require('express');
 const jsonParser = bodyParser.urlencoded({ extended: false });
 
+//use app.post :)
 
 app.post('/done', jsonParser, (req, res) => {
 

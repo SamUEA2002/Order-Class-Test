@@ -1,24 +1,24 @@
 // order.mjs
 
-//allow to read and write from file :(
+//allow to read and write from file :( LOCAL STORAGE :) 
 
 //const { arrayBuffer } = require("stream/consumers")
 
 
 //class createOrder that creates an opject of createOrder when called 
-class createOrder{
+class createOrder {
 
     //takes in below values when order is created
     constructor(orderID,
-                userName,
-                spaceType,
-                userCar,
-                userEmail,
-                userNumber,
-                orderStartDate,
-                orderStartTime,
-                orderDuration
-                ){
+        userName,
+        spaceType,
+        userCar,
+        userEmail,
+        userNumber,
+        orderStartDate,
+        orderStartTime,
+        orderDuration
+    ) {
 
         this.orderID = orderID
         this.userName = userName
@@ -29,20 +29,20 @@ class createOrder{
         this.orderStartDate = orderStartDate
         this.orderStartTime = orderStartTime
         this.orderDuration = orderDuration
-        }
+    }
 
 
     //toString method for createOrder class
-    toString(){
-        return 'Order ID: '+this.orderID+
-               'User Name: '+this.userName+
-               'Order Type: '+this.spaceType+
-               'User Car: '+this.userCar+
-               'User Email: '+this.userEmail+
-               'User Number: '+this.userNumber+
-               'Order Start Date: '+this.orderStartDate+
-               'Order Start Time: '+this.orderStartTime+
-               'Order Duration: '+this.orderDuration;
+    toString() {
+        return 'Order ID: ' + this.orderID +
+            'User Name: ' + this.userName +
+            'Order Type: ' + this.spaceType +
+            'User Car: ' + this.userCar +
+            'User Email: ' + this.userEmail +
+            'User Number: ' + this.userNumber +
+            'Order Start Date: ' + this.orderStartDate +
+            'Order Start Time: ' + this.orderStartTime +
+            'Order Duration: ' + this.orderDuration;
     }
 }
 
@@ -70,22 +70,22 @@ function createUserOrder() {
 
     //generates a (sumwhat) random order id ?? not really used??
     orderID = Math.random() * (10000000 - 1) + 1
-    
+
     //creates a new object with variables taken
     const Order = new createOrder(orderID,
-                                  userName,
-                                  spaceType,
-                                  userCar,
-                                  userEmail,
-                                  userNumber,
-                                  orderStartDate,
-                                  orderStartTime,
-                                  orderDuration);
+        userName,
+        spaceType,
+        userCar,
+        userEmail,
+        userNumber,
+        orderStartDate,
+        orderStartTime,
+        orderDuration);
 
     //console.log(Order);
 
     //creating a key for the object to be saved 
-    key = userEmail+orderStartDate+orderStartTime+orderDuration
+    key = userEmail + orderStartDate + orderStartTime + orderDuration
     console.log(key)
 
     //saves the order in the orderMap
@@ -101,28 +101,40 @@ function createUserOrder() {
 }
 
 
-function showOrders(key){
+function showOrders(key) {
+    console.log("test 2" + localStorage.orderInfo)
     console.log(orderMap.get(key))
     console.log(orderArray)
     console.log(orderMap)
 }
 
-function showAllOrders(){
+function test() {
+    if (typeof(Storage) !== "undefined") {
+        if (localStorage.orderInfo) {
+            userNumber = document.getElementById("Phone Number").value
+            localStorage.orderInfo = userNumber;
+        }
+    }
+    console.log("number: " + localStorage.orderInfo);
+}
+
+function showAllOrders() {
 
     showOrders('shtm02@gmail.com2022-04-0816:303')
 
     //orderArray.forEach(element => {
-      //  console.log(element);
+    //  console.log(element);
     //});
+    console.log("test 1" + localStorage.orderInfo)
     console.log(orderArray)
     console.log(orderMap)
     console.log(orderArray[0])
 
     //x = orderMap.size()
-    
+
     //for (const [key, value] of Object.entries(Order)) {
-      //  console.log(key, value);
-      //}
+    //  console.log(key, value);
+    //}
 
     //console.log(orderMap.get(key))
 
@@ -130,9 +142,9 @@ function showAllOrders(){
 
     //adds all current orders to the confirmation page 
     console.log("test")
-    document.getElementById("OrdersUpdate").innerHTML += 
-    "<h3>This is an order:</h3>";
-    
+    document.getElementById("OrdersUpdate").innerHTML +=
+        "<h3>This is an order:</h3>";
+
 
 }
 
@@ -143,4 +155,4 @@ function showAllOrders(){
 
 //orders still need to be accepted before they can be sent completed 
 
-//save orders to json 
+//save orders to json
