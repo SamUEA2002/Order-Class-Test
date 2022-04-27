@@ -27,11 +27,18 @@
         </div>
     </div>
 
-    <form target="_blank" method="post" action="/done" style="max-width:500px;margin:auto">
-        <h2>Order Form (STANDARD)</h2>
+    <form target="_blank" method="post" action="/confirm" style="max-width:500px;margin:auto">
+        <h2>Order Form</h2>
+
+        <p>Parking Lot: </p>
         <div class="input-container">
-            <i class="fa fa-user icon"></i>
-            <input class="input-field" type="text" placeholder="Name" id="Name">
+            <i class="fa fa-square icon"></i>
+            <label for="input-field"></label>
+            <select name="Lots" id="Lot">
+                <option value="Car">MAIN</option>
+                <option value="Bike">....</option>
+                <option value="Disabled">...</option>
+            </select>
         </div>
 
         <p>Order Type: </p>
@@ -45,43 +52,34 @@
             </select>
         </div>
 
+        <p>Number Plate</p>
         <div class="input-container">
-            <i class="fa fa-tag icon"></i>
-            <input class="input-field" type="text" placeholder="Number Plate" id="Reg">
-        </div>
-
-        <div class="input-container">
-            <i class="fa fa-envelope icon"></i>
-            <input class="input-field" type="text" placeholder="Email" id="Email">
-        </div>
-
-        <div class="input-container">
-            <i class="fa fa-phone icon"></i>
-            <input class="input-field" type="tel" placeholder="Phone Number" id="Phone Number">
+            <i class="fa fa-square icon"></i>
+            <input class="input-field" type="text" placeholder="Number Plate" id="Reg", name = "Reg">
         </div>
 
         <p>Start Date: </p>
         <div class="input-container">
-            <i class="fa fa-calendar-times-o icon"></i>
-            <input class="input-field" type=date min=2014-09-08 id="Start Date">
+            <i class="fa fa-square icon"></i>
+            <input class="input-field" type=date min=2014-09-08 id="Start Date", name = "Date">
         </div>
 
         <p>Start Time: </p>
         <div class="input-container">
-            <i class="fa fa-hourglass-end icon"></i>
-            <input class="input-field" type="time" min="06:00" max="17:00" step="1800" id="Start Time">
+            <i class="fa fa-square icon"></i>
+            <input class="input-field" type=time id="Start Time", name = "Time">
         </div>
 
         <p>Duration (1-5 hours): </p>
         <div class="input-container">
-            <i class="fa fa-building icon"></i>
-            <input class="input-field" type="number" placeholder="Duration (hours)" min=1 max=5 step=1, id="Duration">
+            <i class="fa fa-square icon"></i>
+            <input class="input-field" type="number" placeholder="Duration (hours)" min=1 max=5 step=1, id="Duration", name = "Duration">
         </div>
-        <p>Please note parking lots are only open from 6am - 10pm. </p>
+        <p>Please note parking lots can only be accessed from 6am - 10pm. </p>
 
         <input type="reset" class="btn2">
         <br></br>
-        <button type="submit" class="btn" onclick="test()">Confirm Order</button>
+        <button type="submit" class="btn" onclick="" >Confirm Order</button>
     </form>
 
 

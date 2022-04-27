@@ -29,7 +29,11 @@
         <button class="button button1", onclick="location.href='order.html'">Create Order</button>
 
         <h2>Show Current Orders</h1>
-        <button class="button button1", onclick="showAllOrders()">Show Orders</button>
+          <form action="/getOrder" method="GET">
+            <input type="button" name="test" placeholder="Button">
+            <button>send</button>
+        </form>
+
 
         <div id="OrdersUpdate">
           <h1>Orders:</h1>
