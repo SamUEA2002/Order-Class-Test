@@ -4,13 +4,13 @@ const express = require('express');
 const app = express();
 
 const fs = require('fs');
+const path = require('path')
 
 app.use(express.static('public'));
 
 const bodyParser = require('body-parser');
 const { response } = require('express');
 const jsonParser = bodyParser.urlencoded({ extended: false });
-const jsonString = bodyParser.urlencoded({ extended: false });
 
 //use app.post :)
 
@@ -30,7 +30,7 @@ app.post('/confirm', jsonParser, (req, res) => {
 
     //creates (semi)random order ID for file name
     //var orderID = Math.random() * (999 - 1) + 1;
-    var orderID = 10;
+    var orderID = '#10';
     var fileName = orderID.toString();
     console.log(fileName)
 
@@ -48,22 +48,22 @@ app.post('/confirm', jsonParser, (req, res) => {
 
     //write responce to json
 
-    fs.writeFile(fileName, JSON.stringify(response, null, 2), err => {
+    fs.writeFile('UnconfirmedOrders/' + fileName, JSON.stringify(response, null, 2), err => {
         if (err) return console.log(err);
         console.log('file saved!');
     });
 
-    res.redirect('/confirm.html')
+    res.redirect('/user.html')
 
 });
 
 app.get('/getOrder', (req, res) => {
 
-    fs.readFile("10", function(err, data) {
-      
+    fs.readFile('UnconfirmedOrders/'+"#10", function (err, data) {
+
         // Check for errors
         if (err) throw err;
-       
+
         // Converting to JSON
         var items = JSON.parse(data);
 
@@ -74,47 +74,146 @@ app.get('/getOrder', (req, res) => {
         var startDate = items.startDate;
         var startTime = items.startTime;
         var duration = items.Duration;
-        
+
+
+
+
         //console.log(items.Duration);
 
         res.set('Content-Type', 'text/html')
         res.send(Buffer.from(
-            '<!DOCTYPE html>'+
-            '<html lang="en">'+
-            '<link rel="stylesheet" href="style.css" />'+
-            '<link rel="stylesheet" href="header.css" />'+
+            '<!DOCTYPE html>' +
+            '<html lang="en">' +
+            '<link rel="stylesheet" href="style.css" />' +
+            '<link rel="stylesheet" href="header.css" />' +
 
-            '<head><title>ORDER INFO</title></head>'+
+            '<head><title>ORDER INFO</title></head>' +
 
-            '<body>'+
-            '<div class="header">'+
-                '<a class="logo">USER ORDER '+orderID+'</a>'+
-                '<div class="header-right">'+
-                  '<a class="active" href="/index.html">Home</a>'+
-                '</div>'+
-              '</div>'+
-            '</body>'+
+            '<body>' +
+            '<div class="header">' +
+            '<a class="logo">USER ORDER ' + orderID + '</a>' +
+            '<div class="header-right">' +
+            '<a class="active" href="/user.html">User Home</a>' +
+            '</div>' +
+            '</div>' +
+            '</body>' +
 
-            '<p>User      : </p>'+
-            '<p>Order ID  : '+orderID+'</p>'+
-            '<p>Order Type: '+lotType+'</p>'+
-            '<p>Space Type: '+spaceType+'</p>'+
-            '<p>Reg       : '+numberPlate+'</p>'+
-            '<p>Start Date: '+startDate+'</p>'+
-            '<p>Start Time: '+startTime+'</p>'+
-            '<p>Duration  : '+duration+'</p>'
-            
-            ))
+            '<p>User      : </p>' +
+            '<p>Order ID  : ' + orderID + '</p>' +
+            '<p>Order Type: ' + lotType + '</p>' +
+            '<p>Space Type: ' + spaceType + '</p>' +
+            '<p>Reg       : ' + numberPlate + '</p>' +
+            '<p>Start Date: ' + startDate + '</p>' +
+            '<p>Start Time: ' + startTime + '</p>' +
+            '<p>Duration  : ' + duration + '</p>' +
+
+            '<br>'
+
+
+        ))
 
     });
 
+
+});
+
+
+
+
+app.get('/getAllOrders', (req, res) => {
+
+    const directoryPath = path.join(__dirname, '/UnconfirmedOrders');
+
+    fs.readdir(directoryPath, function (err, files) {
+
+        res.set('Content-Type', 'text/html')
+        res.write(Buffer.from(
+
+            
+            '<!DOCTYPE html>' +
+            '<html lang="en">' +
+            '<link rel="stylesheet" href="style.css" />' +
+            '<link rel="stylesheet" href="header.css" />' +
+
+            '<head><title>ORDER INFO</title></head>' +
+
+            '<body>' +
+            '<div class="header">' +
+            '<a class="logo">All Unconfirmed Orders </a>' +
+            '<div class="header-right">' +
+            '<a class="active" href="/user.html">User Home</a>' +
+            '</div>' +
+            '</div>' +
+            '</body>'+
+
+            '<p>test3     : </p>'+
+
+
+            
+            //listing all files using forEach
+            files.forEach(function (file) {
+    
+                console.log(file);
+                var name = file;
+    
+                fs.readFile(__dirname + '/UnconfirmedOrders/' + name, function (err, data) {
+
+                
+    
+                    // Check for errors
+                    if (err) throw err;
+    
+                    // Converting to JSON
+                    var items = JSON.parse(data);
+    
+                    var orderID = items.orderID;
+                    var lotType = items.lotType;
+                    var spaceType = items.spaceType;
+                    var numberPlate = items.numberPlate;
+                    var startDate = items.startDate;
+                    var startTime = items.startTime;
+                    var duration = items.Duration;
+    
+                    console.log("FILE: "+ file)
+                    console.log(items)+
+
+                
+                    res.write(Buffer.from(
+                    
+    
+                        '<p>User      : </p>' +
+                        '<p>Order ID  : ' + orderID + '</p>' +
+                        '<p>Order Type: ' + lotType + '</p>' +
+                        '<p>Space Type: ' + spaceType + '</p>' +
+                        '<p>Reg       : ' + numberPlate + '</p>' +
+                        '<p>Start Date: ' + startDate + '</p>' +
+                        '<p>Start Time: ' + startTime + '</p>' +
+                        '<p>Duration  : ' + duration + '</p>' +
+    
+                        '<br>'
+                    
+                    ))
+
+                    res.end();
+    
+                });
+    
+    
+    
+                // Do whatever you want to do with the file
+    
+    
+    
+            })
+
+        ))
+
     
 
 
-
-    
-
-
+        //handling error
+        
+    });
 
 
 });

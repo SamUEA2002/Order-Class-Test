@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>PMS INDEX</title>
+    <title>PMS ADMIN</title>
     <meta charset=�utf-8�>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="order.mjs"></script>
@@ -14,7 +14,7 @@
 
 <body>
     <div class="header">
-        <a class="logo">USER PAGE</a>
+        <a class="logo">ADMIN PAGE</a>
         <div class="header-right">
           <a class="active" href="index.html">Home</a>
           <a href="confirm.html">Orders</a>
@@ -25,13 +25,16 @@
       
 
     <main>
-        <h1>User Login</h1>
-        <button class="button button1", onclick="location.href='user.html'">login</button>
 
-        <h1>Admin Login</h1>
-        <button class="button button1", onclick="location.href='admin.html'">login</button>
+        <h2>Show ALL Orders</h1>
+            <form action="/getAllOrders" method="GET">
+              <input type="button" name="test" placeholder="Button">
+              <button>send</button>
+          </form>
 
-        <h2>Return to index</h1>
+
+
+        <h2>Return to INDEX</h1>
         <button class="button button1", onclick="location.href='index.html'">User Home</button>
     </main>
 
