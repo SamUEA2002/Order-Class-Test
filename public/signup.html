@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PMS INDEX</title>
+    <meta charset=�utf-8�>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="order.mjs"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="buttons.css" />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="form.css" />
+</head>
+
+<body>
+    <div class="header">
+        <a class="logo">USER PAGE</a>
+        <div class="header-right">
+          <a class="active" href="index.html">Home</a>
+          <a href="confirm.html">Orders</a>
+          <a href="index.html">Logout</a>
+        </div>
+      </div>
+
+      
+
+    <main>
+
+        <form method="post" action="/confirm" style="max-width:500px;margin:auto">
+            <h2>Order Form</h2>
+    
+            <p>First Name</p>
+            <div class="input-container">
+                <i class="fa fa-square icon"></i>
+                <input class="input-field" type="text" placeholder="First Name" id="First_Name", name = "First_Name">
+            </div>
+
+            <p>Last Name</p>
+            <div class="input-container">
+                <i class="fa fa-square icon"></i>
+                <input class="input-field" type="text" placeholder="First Name" id="First_Name", name = "First_Name">
+            </div>
+
+            <p>Email</p>
+            <div class="input-container">
+                <i class="fa fa-square icon"></i>
+                <input class="input-field" type="email" placeholder="Email" id="Email", name = "Email">
+            </div>
+
+            <p>Phone</p>
+            <div class="input-container">
+                <i class="fa fa-square icon"></i>
+                <input class="input-field" type="number" placeholder="Number" id="Number", name = "Number">
+            </div>
+
+            <p>Password/p>
+            <div class="input-container">
+                <i class="fa fa-square icon"></i>
+                <input class="input-field" type="text" placeholder="Password" id="Password", name = "Password">
+            </div>
+
+    
+            <input type="reset" class="btn2">
+            <br></br>
+            <button type="Create Account" class="btn" onclick="" >Confirm Order</button>
+        </form>
+
+    </main>
+
+    <footer id="title">Copyright © 2022 SE Group 30</footer>
+
+</body>
+
+
+
+</html>
+

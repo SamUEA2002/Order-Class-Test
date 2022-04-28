@@ -14,6 +14,47 @@ const jsonParser = bodyParser.urlencoded({ extended: false });
 
 //use app.post :)
 
+
+//registers user
+
+
+app.post('/register', jsonParser, (req, res) => {
+
+    //Processes the form data
+    //Private data is held in a Hash incase the data is released 
+
+    console.log(req.body);
+    const Fname = req.body.Fname
+    const Lname = req.body.Lname
+    const Email = req.body.Email
+    const Number = req.body.Number
+    const Password = req.body.Password
+
+    var fileName = Email;
+    console.log(fileName)
+
+
+    //format responce for json
+    var response = {
+        Fname: Fname,
+        Lname: Lname,
+        Email: Email,
+        Number: Number,
+        Password: Password
+    }
+
+    //write responce to json
+
+    fs.writeFile('UnconfirmedOrders/' + fileName, JSON.stringify(response, null, 2), err => {
+        if (err) return console.log(err);
+        console.log('file saved!');
+    });
+
+    res.redirect('/user.html')
+
+});
+
+//confirm order
 app.post('/confirm', jsonParser, (req, res) => {
 
     //Processes the form data
@@ -57,6 +98,7 @@ app.post('/confirm', jsonParser, (req, res) => {
 
 });
 
+//get order for user
 app.get('/getOrder', (req, res) => {
 
     fs.readFile('UnconfirmedOrders/'+"#10", function (err, data) {
@@ -117,9 +159,7 @@ app.get('/getOrder', (req, res) => {
 
 });
 
-
-
-
+//get all orders for admin
 app.get('/getAllOrders', (req, res) => {
 
     const directoryPath = path.join(__dirname, '/UnconfirmedOrders');
@@ -146,12 +186,12 @@ app.get('/getAllOrders', (req, res) => {
             '</div>' +
             '</body>'+
 
-            '<p>test3     : </p>'+
+            '<p>test3     : </p>'
 
 
             
             //listing all files using forEach
-            files.forEach(function (file) {
+            ,files.forEach(function (file) {
     
                 console.log(file);
                 var name = file;
@@ -195,11 +235,12 @@ app.get('/getAllOrders', (req, res) => {
 
                 });
 
-            })
-
+            }),
+            
         ))
-        //res.end();
+        
         return;
+        
         
     
 
@@ -207,7 +248,7 @@ app.get('/getAllOrders', (req, res) => {
         //handling error
         
     });
-
+    
 
 });
 
