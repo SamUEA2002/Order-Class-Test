@@ -157,11 +157,11 @@ app.get('/getAllOrders', (req, res) => {
                 var name = file;
     
                 fs.readFile(__dirname + '/UnconfirmedOrders/' + name, function (err, data) {
-
                 
     
                     // Check for errors
                     if (err) throw err;
+                    
     
                     // Converting to JSON
                     var items = JSON.parse(data);
@@ -180,7 +180,6 @@ app.get('/getAllOrders', (req, res) => {
                 
                     res.write(Buffer.from(
                     
-    
                         '<p>User      : </p>' +
                         '<p>Order ID  : ' + orderID + '</p>' +
                         '<p>Order Type: ' + lotType + '</p>' +
@@ -194,20 +193,14 @@ app.get('/getAllOrders', (req, res) => {
                     
                     ))
 
-                    res.end();
-    
                 });
-    
-    
-    
-                // Do whatever you want to do with the file
-    
-    
-    
+
             })
 
         ))
-
+        //res.end();
+        return;
+        
     
 
 
