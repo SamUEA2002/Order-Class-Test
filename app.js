@@ -29,8 +29,10 @@ app.post('/confirm', jsonParser, (req, res) => {
 
 
     //creates (semi)random order ID for file name
-    //var orderID = Math.random() * (999 - 1) + 1;
-    var orderID = '#10';
+    //var orderID = Math.round(Math.random() * 1000);
+    let d = new Date();
+    var orderID = 'Order#' + Math.round(d.getTime());
+    //var orderID = '#10';
     var fileName = orderID.toString();
     console.log(fileName)
 
@@ -48,18 +50,17 @@ app.post('/confirm', jsonParser, (req, res) => {
 
     //write responce to json
 
-    fs.writeFile('UnconfirmedOrders/' + fileName, JSON.stringify(response, null, 2), err => {
+    fs.writeFile('UnconfirmedOrders/' + fileName + '.json', JSON.stringify(response, null, 2), err => {
         if (err) return console.log(err);
         console.log('file saved!');
     });
 
-    res.redirect('/user.html')
-
+    return res.redirect('/user.html')
 });
 
 app.get('/getOrder', (req, res) => {
 
-    fs.readFile('UnconfirmedOrders/'+"#10", function (err, data) {
+    fs.readFile('UnconfirmedOrders/'+"#10"+'.json', function (err, data) {
 
         // Check for errors
         if (err) throw err;
@@ -114,7 +115,7 @@ app.get('/getOrder', (req, res) => {
 
     });
 
-
+    return;
 });
 
 
@@ -146,9 +147,7 @@ app.get('/getAllOrders', (req, res) => {
             '</div>' +
             '</body>'+
 
-            '<p>test3     : </p>'+
-
-
+            '<p>test3     : </p>',
             
             //listing all files using forEach
             files.forEach(function (file) {
@@ -198,17 +197,8 @@ app.get('/getAllOrders', (req, res) => {
             })
 
         ))
-        //res.end();
-        return;
-        
-    
-
-
-        //handling error
-        
     });
-
-
+    return;
 });
 
 

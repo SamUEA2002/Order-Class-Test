@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <form target="_blank" method="post" action="/confirm" style="max-width:500px;margin:auto">
+    <form method="post" action="/confirm" style="max-width:500px;margin:auto">
         <h2>Order Form</h2>
 
         <p>Parking Lot: </p>
@@ -61,7 +61,7 @@
         <p>Start Date: </p>
         <div class="input-container">
             <i class="fa fa-square icon"></i>
-            <input class="input-field" type=date min=2014-09-08 id="Start Date", name = "Date">
+            <input class="input-field" type=date min=2022-01-01 id="Start Date", name = "Date">
         </div>
 
         <p>Start Time: </p>
@@ -90,8 +90,11 @@
 
     <footer id="title">Copyright © 2022 SE Group 30</footer>
 
+    <script type="text/javascript">
+        var today = new Date();
+        document.getElementById("Start Date").setAttribute("min", today.toISOString().substring(0,10));
+    </script>
+
 </body>
-
-
 
 </html>
