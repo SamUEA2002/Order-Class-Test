@@ -15,44 +15,63 @@ const jsonParser = bodyParser.urlencoded({ extended: false });
 //use app.post :)
 
 
+//cookies
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
+
 //registers user
 
 
 app.post('/register', jsonParser, (req, res) => {
 
-    //Processes the form data
-    //Private data is held in a Hash incase the data is released 
+    
+        //Processes the form data
+        //Private data is held in a Hash incase the data is released 
 
-    console.log(req.body);
-    const Fname = req.body.Fname
-    const Lname = req.body.Lname
-    const Email = req.body.Email
-    const Number = req.body.Number
-    const Password = req.body.Password
+        //console.log(req.body);
+        const Fname = req.body.Fname
+        const Lname = req.body.Lname
+        const Email = req.body.Email
+        const Number = req.body.Number
+        const Password = req.body.Password
 
-    var fileName = Email;
-    console.log(fileName)
+        var fileName = Email;
+        console.log("filename: "+fileName)
 
 
-    //format responce for json
-    var response = {
-        Fname: Fname,
-        Lname: Lname,
-        Email: Email,
-        Number: Number,
-        Password: Password
+        //format responce for json
+        var response = {
+            Fname: Fname,
+            Lname: Lname,
+            Email: Email,
+            Number: Number,
+            Password: Password
+        }
+
+        //setting session storage 
+
+
+        res.cookie(Email+"Data", response);
+
+        console.log("cookies:")
+        console.log(req.cookies)
+        
+
+
+        //write responce to json
+
+        fs.writeFile('Users/' + fileName, JSON.stringify(response, null, 2), err => {
+            if (err) return console.log(err);
+            console.log('file saved!');
+        });
+
+        res.redirect('/user.html')
     }
 
-    //write responce to json
 
-    fs.writeFile('UnconfirmedOrders/' + fileName, JSON.stringify(response, null, 2), err => {
-        if (err) return console.log(err);
-        console.log('file saved!');
-    });
 
-    res.redirect('/user.html')
-
-});
+);
 
 //confirm order
 app.post('/confirm', jsonParser, (req, res) => {
@@ -101,7 +120,7 @@ app.post('/confirm', jsonParser, (req, res) => {
 //get order for user
 app.get('/getOrder', (req, res) => {
 
-    fs.readFile('UnconfirmedOrders/'+"#10", function (err, data) {
+    fs.readFile('UnconfirmedOrders/' + "#10", function (err, data) {
 
         // Check for errors
         if (err) throw err;
@@ -169,7 +188,7 @@ app.get('/getAllOrders', (req, res) => {
         res.set('Content-Type', 'text/html')
         res.write(Buffer.from(
 
-            
+
             '<!DOCTYPE html>' +
             '<html lang="en">' +
             '<link rel="stylesheet" href="style.css" />' +
@@ -184,28 +203,28 @@ app.get('/getAllOrders', (req, res) => {
             '<a class="active" href="/user.html">User Home</a>' +
             '</div>' +
             '</div>' +
-            '</body>'+
+            '</body>' +
 
             '<p>test3     : </p>'
 
 
-            
+
             //listing all files using forEach
-            ,files.forEach(function (file) {
-    
+            , files.forEach(function (file) {
+
                 console.log(file);
                 var name = file;
-    
+
                 fs.readFile(__dirname + '/UnconfirmedOrders/' + name, function (err, data) {
-                
-    
+
+
                     // Check for errors
                     if (err) throw err;
-                    
-    
+
+
                     // Converting to JSON
                     var items = JSON.parse(data);
-    
+
                     var orderID = items.orderID;
                     var lotType = items.lotType;
                     var spaceType = items.spaceType;
@@ -213,42 +232,42 @@ app.get('/getAllOrders', (req, res) => {
                     var startDate = items.startDate;
                     var startTime = items.startTime;
                     var duration = items.Duration;
-    
-                    console.log("FILE: "+ file)
-                    console.log(items)+
 
-                
-                    res.write(Buffer.from(
-                    
-                        '<p>User      : </p>' +
-                        '<p>Order ID  : ' + orderID + '</p>' +
-                        '<p>Order Type: ' + lotType + '</p>' +
-                        '<p>Space Type: ' + spaceType + '</p>' +
-                        '<p>Reg       : ' + numberPlate + '</p>' +
-                        '<p>Start Date: ' + startDate + '</p>' +
-                        '<p>Start Time: ' + startTime + '</p>' +
-                        '<p>Duration  : ' + duration + '</p>' +
-    
-                        '<br>'
-                    
-                    ))
+                    console.log("FILE: " + file)
+                    console.log(items) +
+
+
+                        res.write(Buffer.from(
+
+                            '<p>User      : </p>' +
+                            '<p>Order ID  : ' + orderID + '</p>' +
+                            '<p>Order Type: ' + lotType + '</p>' +
+                            '<p>Space Type: ' + spaceType + '</p>' +
+                            '<p>Reg       : ' + numberPlate + '</p>' +
+                            '<p>Start Date: ' + startDate + '</p>' +
+                            '<p>Start Time: ' + startTime + '</p>' +
+                            '<p>Duration  : ' + duration + '</p>' +
+
+                            '<br>'
+
+                        ))
 
                 });
 
             }),
-            
+
         ))
-        
+
         return;
-        
-        
-    
+
+
+
 
 
         //handling error
-        
+
     });
-    
+
 
 });
 
